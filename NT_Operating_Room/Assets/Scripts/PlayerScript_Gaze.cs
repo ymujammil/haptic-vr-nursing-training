@@ -61,6 +61,7 @@ public class PlayerScript_Gaze : MonoBehaviour {
                 ,~layerMask
                 ))
             {
+                //Debug.Log("Hit Something");
                 if (
                 //controller.PLAYING 
                 //&& 
@@ -102,23 +103,19 @@ public class PlayerScript_Gaze : MonoBehaviour {
                     GazeTime2 += Time.deltaTime;
                     if (GazeTime2 > 0.5f)
                     {
-                    Debug.Log("Play the video");
-                    //aplayer.Play();
                     vplayer.Play();
                     }
                 }
                 else {
-                    Debug.Log("Pause the video");
                     GazeTime2 = 0.0f;
                     vplayer.Pause();
-                    //aplayer.Pause();
+                    //Debug.Log("Not hitting the screen");
                 }
                 if (hit.collider.name == "rewind") {
                     GazeTime3 += Time.deltaTime;
-                    if (GazeTime3 > 2f)
+                    if (GazeTime3 > 1f)
                     {
                         vplayer.time = vplayer.time - 10;
-                        //aplayer.time = aplayer.time - 10;
                         GazeTime3 = 0.0f;
                     }
 
@@ -126,10 +123,9 @@ public class PlayerScript_Gaze : MonoBehaviour {
                 else GazeTime3 = 0.0f;
                 if (hit.collider.name == "fast-forward") {
                     GazeTime4 += Time.deltaTime;
-                    if (GazeTime4 > 2f)
+                    if (GazeTime4 > 1f)
                     {
                         vplayer.time = vplayer.time + 10;
-                        //aplayer.time = aplayer.time + 10;
                         GazeTime4 = 0.0f;
                     }
                 }

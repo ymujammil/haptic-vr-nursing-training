@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using UnityEngine;
 using FFmpegOut;
+using Valve.VR;
 
 public class Heatmap : MonoBehaviour 
 {
@@ -127,7 +128,7 @@ public class Heatmap : MonoBehaviour
 		if (RenderingCamera != null)
 		{
 			RenderingCamera.aspect = 2;
-			renderingTexture = new RenderTexture (854, 480, 0); //(2048, 1024, 0) (1280, 720, 0)
+			renderingTexture = new RenderTexture(1280, 720, 0); //  (854, 480, 0) (2048, 1024, 0)
             RenderingCamera.targetTexture = renderingTexture;
 
 			RenderingMeshFilter = RenderingCamera.GetComponentInChildren<MeshFilter> ();
@@ -261,7 +262,7 @@ public class Heatmap : MonoBehaviour
 		if ( renderingMaterial != null)
 			cam.RenderToCubemap (Cubemap);
 		
-		if (Input.GetKeyUp (KeyCode.H))
+		if (Input.GetKeyUp (KeyCode.H) || SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.Any))
 			capturing = !capturing;
 	}
 
@@ -346,7 +347,7 @@ public class Heatmap : MonoBehaviour
 
 	FFmpegPipe _pipe;
 	List<byte> timeStampList = new List<byte>();
-	int _frameRate = 30;
+	int _frameRate = 60;
 
 	void OpenPipe()
 	{
